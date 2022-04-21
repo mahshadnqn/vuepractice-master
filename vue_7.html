@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+	
+		<title>J1 Practice</title>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<style>
+			.formfield{margin-bottom:10px;}
+		</style>
+	</head>
+	<body>
+	<p>Cupcake J1 Problem (2022)<a href="https://cemc.uwaterloo.ca/contests/computing/2022/">from the J1 problem hosted by the CCC.</a></p>
+	<div id="app">
+		<div class="formfield">
+			<label>Small Boxes: <label> <input v-model="small_box_ct">
+		</div>
+		<div class="formfield">
+			<label>Regular Boxes: <label> <input v-model="regular_box_ct">
+		</div>
+		<div id="result">
+			<div><label>show diagnostics:</label><input type="checkbox" v-model="treat_diagnostics"></div>
+			<div v-if="treat_diagnostics">Cupcake Total: {{treat_total}}</div>
+			<div v-if="treat_diagnostics">Cupckaes left: {{is_happy}}</div>
+			<span v-if="is_happy">{{is_happy}} cupcake(s) are left for {{dog_name}}</span>
+		</div>
+	</div>
+	
+	<script>
+	var app = new Vue({
+		el: '#app',
+		data:{
+			treat_diagnostics:false,
+			dog_name:"Students",
+			small_box_ct:0,
+			regular_box_ct:0,
+			small_box_qnty:3,
+			regular_box_qnty:8,
+		},
+		computed:{
+			treat_total:function(){
+				return (this.small_box_ct * this.small_box_qnty) + 
+				(this.regular_box_ct* this.regular_box_qnty); 	
+			},
+			is_happy:function(){
+				
+				return this.treat_total - 28;	
+			}
+		}
+	});
+	
+	</script>
+	<!--
+		v-model will allow you to quickly bind form elements to the data property.
+		Make sure to set a default value!
+		The Computed property can be used like data, except for values that are calculated from data properties.
+		In this example 'treat_total' is computed from data properties, and 'is_happy' is computed from 'treat_total'.
+		
+		ASYNCHRONOUS LEARNING EXERCISE : J1
+		- Find any J1 problem
+		- Imagine an interface that allows the user to enter data on the webpage
+		- Build using v-model and computed properties!
+	
+	-->
+	</body>
+</html>
